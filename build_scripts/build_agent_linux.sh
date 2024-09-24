@@ -51,17 +51,20 @@ mkdir -p "$DIST_DIR"
 
 setup_environment_commands="
 set +x &&
-export PYENV_ROOT=\"\${HOME}/.pyenv\" &&
-command -v pyenv >/dev/null || export PATH=\"\$PYENV_ROOT/bin:\$PATH\" &&
-eval \"\$(pyenv init -)\" &&
+export PIP_CACHE_DIR=\"\$(mktemp -d)\" &&
+export PYINSTALLER_CONFIG_DIR=\"\$(mktemp -d)\" &&
+export VENV_DIR=\"\$(mktemp -d)\" &&
 python --version &&
+python -m venv \"\${VENV_DIR}\" &&
+source \"\${VENV_DIR}\"/bin/activate &&
 pip install pipenv &&
 "
 
 clone_commands="
+export REPO_DIR=\$(mktemp -d) &&
 echo \"Cloning branch ${BRANCH}...\" &&
-git clone https://github.com/guardicore/monkey.git -b \"${BRANCH}\" --single-branch --depth 1 &&
-cd monkey/monkey/infection_monkey &&
+git clone https://github.com/guardicore/monkey.git -b \"${BRANCH}\" --single-branch --depth 1 \"\${REPO_DIR}\"&&
+cd \"\${REPO_DIR}\"/monkey/infection_monkey &&
 "
 
 local_commands="
@@ -96,7 +99,8 @@ TAG="latest"
 docker pull infectionmonkey/agent-builder:$TAG
 docker run \
     --rm \
+    --user "$(id -u):$(id -g)" \
     -v "${DIST_DIR}:/dist" \
     -v "${SCRIPT_DIR}/../:/src" \
     infectionmonkey/agent-builder:$TAG \
-    /bin/bash -c "${docker_commands}" | ts  '[%Y-%m-%d %H:%M:%S]'
+    /bin/bash -l -c "${docker_commands}" | ts  '[%Y-%m-%d %H:%M:%S]'

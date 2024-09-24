@@ -11,10 +11,17 @@ const SCAN_TARGET_CONFIGURATION_SCHEMA = {
       'uniqueItems': true,
       'items': {
         'type': 'string',
-        'format': 'ip'
+        'format': 'ip-range'
       },
       'default': [],
-      'description': 'List of IPs that the monkey will not scan.'
+      'description': 'List of IPs that the Monkey will not scan. Values can be ' +
+        'IPs, subnets or hosts. ' +
+        'Examples:\n' +
+        '\tBlock a specific IP: "192.168.0.1"\n' +
+        '\tBlock a subnet using a network range: ' +
+        '"192.168.0.5-192.168.0.20"\n' +
+        '\tBlock a subnet using an IP mask: "192.168.0.5/24"\n' +
+        '\tBlock a specific host: "printer.example"'
     },
     'scan_my_networks': {
       'title': 'Scan Agent\'s networks',

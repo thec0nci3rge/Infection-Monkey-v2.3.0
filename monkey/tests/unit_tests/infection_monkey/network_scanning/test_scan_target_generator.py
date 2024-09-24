@@ -3,7 +3,6 @@ from itertools import chain
 
 import pytest
 
-from common.network.network_range import InvalidNetworkRangeError
 from infection_monkey.network import NetworkAddress
 from infection_monkey.network_scanning.scan_target_generator import compile_scan_target_list
 
@@ -94,6 +93,63 @@ def test_blocklisted_ips():
     assert len(scan_targets) == 252
     for blocked_ip in blocklisted_ips:
         assert blocked_ip not in scan_targets
+
+
+def test_blocklisted_ips__subnets():
+    # Calculation:
+    #   (1) 10.1.0.1, 10.1.0.40, 10.1.0.77 should be scanned ---------------> +3
+    #       but 10.1.0.0/24 (includes all 3 above) is blocked --------------> -3
+    #   (2) 10.0.0.5/24 should be scanned ----------------------------------> +255
+    #       but 10.0.0.5, 10.0.0.32, 10.0.0.119 are blocked ----------------> -3
+    #   (3) 192.168.1.0-192.168.1.50 should be scanned ---------------------> +51
+    #       but 192.168.1.33 is blocked ------------------------------------> -1
+    #       and 192.168.1.10-192.168.1.15 are blocked ----------------------> -6
+
+    ranges_to_scan = [
+        "10.1.0.1",
+        "10.1.0.40",
+        "10.1.0.77",
+        "10.0.0.5/24",
+        "192.168.1.0-192.168.1.50",
+    ]
+    blocklisted_ips = [
+        "10.1.0.0/24",
+        "10.0.0.5",
+        "10.0.0.32",
+        "10.0.0.119",
+        "192.168.1.33",
+        "192.168.1.10-192.168.1.15",
+    ]
+
+    scan_targets = compile_scan_target_list(
+        local_network_interfaces=[],
+        ranges_to_scan=ranges_to_scan,
+        inaccessible_subnets=[],
+        blocklisted_ips=blocklisted_ips,
+        scan_my_networks=False,
+    )
+    ip_strs = [target.ip for target in scan_targets]
+
+    assert len(scan_targets) == 296
+    assert "10.1.0.1" not in ip_strs
+    assert "10.1.0.40" not in ip_strs
+    assert "10.1.0.77" not in ip_strs
+    assert "10.0.0.5" not in ip_strs
+    assert "10.0.0.32" not in ip_strs
+    assert "10.0.0.119" not in ip_strs
+    assert "192.168.1.33" not in ip_strs
+    assert "192.168.1.10" not in ip_strs
+    assert "192.168.1.11" not in ip_strs
+    assert "192.168.1.12" not in ip_strs
+    assert "192.168.1.13" not in ip_strs
+    assert "192.168.1.14" not in ip_strs
+    assert "192.168.1.15" not in ip_strs
+
+    assert "192.168.1.9" in ip_strs
+    assert "192.168.1.16" in ip_strs
+    assert "10.0.0.4" in ip_strs
+    assert "10.0.0.0" in ip_strs
+    assert "10.0.0.254" in ip_strs
 
 
 @pytest.mark.parametrize("ranges_to_scan", [["10.0.0.5"], []])
@@ -444,25 +500,6 @@ def test_invalid_inputs():
 
     for ip in [148, 149, 150]:
         assert NetworkAddress(f"172.60.145.{ip}", None) in scan_targets
-
-
-def test_invalid_blocklisted_ip():
-    local_network_interfaces = [IPv4Interface("172.60.145.109/30")]
-
-    inaccessible_subnets = ["172.60.147.8/30", "172.60.147.148/30"]
-
-    targets = ["172.60.145.151/30"]
-
-    blocklisted = ["172.60.145.153", "172.60.145.753"]
-
-    with pytest.raises(InvalidNetworkRangeError):
-        compile_scan_target_list(
-            local_network_interfaces=local_network_interfaces,
-            ranges_to_scan=targets,
-            inaccessible_subnets=inaccessible_subnets,
-            blocklisted_ips=blocklisted,
-            scan_my_networks=False,
-        )
 
 
 def test_sorted_scan_targets():

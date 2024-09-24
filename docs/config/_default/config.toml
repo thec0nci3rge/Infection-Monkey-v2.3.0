@@ -2,7 +2,7 @@
 # baseURL = "https://staging-covuyicu.kinsta.cloud/infectionmonkey/docs/"
 baseURL = ""
 languageCode = "en-us"
-title = "Guardicore Infection Monkey - Documentation Hub"
+title = "Infection Monkey Documentation"
 
 theme = "learn"
 
@@ -14,11 +14,14 @@ theme = "learn"
   # Author of the site, will be used in meta information
   author = "Guardicore"
   # Description of the site, will be used in meta information
-  description = "Guardicore Infection Monkey - Documentation hub"
+  description = "Infection Monkey Documentation"
   # Shows a checkmark for visited pages on the menu
   showVisitedLinks = false
   # Disable search function. It will hide search bar
   disableSearch = false
+  # If set to false, a Home button will appear below the search bar on the menu.
+  # It is redirecting to the landing page of the current language if specified. (Default is "/")
+  disableLandingPageButton = false
   # Javascript and CSS cache are automatically busted when new version of site is generated.
   # Set this to true to disable this behavior (some proxies don't handle well this optimization)
   disableAssetsBusting = false
@@ -35,30 +38,30 @@ theme = "learn"
   # Order sections in menu by "weight" or "title". Default to "weight"
   ordersectionsby = "weight"
   # Provide a list of custom css files to load relative from the `static/` folder in the site root.
-  custom_css = ["css/labels.css", "css/shadow_around_images.css"]
+  custom_css = ["css/chapters.css", "css/labels.css", "css/shadow-around-images.css", "css/table-of-contents.css", "css/tooltip.css"]
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 
-[[menu.shortcuts]] 
+[[menu.shortcuts]]
 name = "<i class='fas fa-home'></i> Homepage"
 identifier = "homepage"
 url = "https://infectionmonkey.com"
 weight = 10
 
-[[menu.shortcuts]] 
+[[menu.shortcuts]]
 name = "<i class='fab fa-github'></i> GitHub"
 identifier = "github"
 url = "https://github.com/guardicore/monkey"
 weight = 20
 
-[[menu.shortcuts]] 
+[[menu.shortcuts]]
 name = "<i class='fab fa-slack'></i> Slack"
 identifier = "slack"
-url = "https://join.slack.com/t/infectionmonkey/shared_invite/enQtNDU5MjAxMjg1MjU1LWM0NjVmNWE2ZTMzYzAxOWJiYmMxMzU0NWU3NmUxYjcyNjk0YWY2MDkwODk4NGMyNDU4NzA4MDljOWNmZWViNDU"
+url = "https://join.slack.com/t/infectionmonkey/shared_invite/zt-2cm5qiayf-yiEg5RPau0zQhki9xTlORA"
 weight = 30
 
-[[menu.shortcuts]] 
+[[menu.shortcuts]]
 name = "<i class='fas fa-inbox'></i> Email"
 identifier = "email"
 url = "mailto:support@infectionmonkey.com"

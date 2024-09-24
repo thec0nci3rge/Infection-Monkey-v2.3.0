@@ -1,39 +1,38 @@
 ---
 title: "Windows"
-date: 2020-05-26T20:57:10+03:00
 draft: false
 pre: '<i class="fab fa-windows"></i> '
-weight: 2
 tags: ["setup", "windows"]
 ---
 
 ## Deployment
 
 {{% notice tip %}}
-Don't get scared if the Infection Monkey gets [flagged as malware during the installation](/faq/#is-the-infection-monkey-a-malwarevirus).
+Don't get scared if Infection Monkey gets [flagged as malware during the installation](/faq/#is-infection-monkey-a-malwarevirus).
 {{% /notice %}}
 
 After running the installer, the following prompt should appear on the screen:
 
-![Windows installer screenshot](../../images/island/others/windows_installer.png "Windows installer screenshot")
+![Windows installer screenshot](../../images/island/others/windows-installer.png "Windows installer screenshot")
 
 1. Follow the steps to complete the installation.
-1. Run the Infection Monkey by clicking on the desktop shortcut. **Note**: If you want Agents to
+1. Run Infection Monkey by clicking on the desktop shortcut. **Note**: If you want Agents to
 collect more data on the current machine, consider running as Administrator.
 
 {{% notice info %}}
 If you're prompted to delete your data directory and you're not sure what to
-do, see the [FAQ]({{< ref
-"/faq/#i-updated-to-a-new-version-of-the-infection-monkey-and-im-being-asked-to-delete-my-existing-data-directory-why"
->}}) for more information.
+do, see the
+[FAQ](/faq#i-updated-to-a-new-version-of-infection-monkey-and-im-being-asked-to-delete-my-existing-data-directory-why)
+for more information.
 {{% /notice %}}
 
-Once you have access to the Monkey Island server, check out the [getting started page]({{< ref "/usage/getting-started" >}}).
+Once you have access to the Monkey Island server, check out the [getting
+started page](/usage/getting-started).
 
 ## Configuring the server
 
 You can configure the server by editing [the configuration
-file](../../reference/server_configuration) located in installation directory.
+file](../../reference/server-configuration) located in installation directory.
 The default path is
 `C:\Program Files\Infection Monkey\monkey_island\cc\server_config.json`.
 
@@ -98,9 +97,9 @@ private certificate authority.
 ### Support
 
 Only **English** system locale is supported. If your command prompt gives output in a different
-language, the Infection Monkey is not guaranteed to work.
+language, Infection Monkey is not guaranteed to work.
 
-For supported Windows versions, take a look at the [OS support page](../../reference/operating_systems_support).
+For a list of supported Windows versions, see the [system requirements page](../../reference/system-requirements).
 
 ### Missing Windows update
 
@@ -117,10 +116,10 @@ here](https://www.google.com/chrome/).
 
 ## Upgrading
 
-To upgrade the Infection Monkey on Windows, download the new installer and run
+To upgrade Infection Monkey on Windows, download the new installer and run
 it. The new Monkey version will be installed over the old version.
 
 If you'd like to keep your existing configuration, you can export it to a file
 using the *Export config* button and then import it to the new Monkey Island.
 
-![Import/export configuration](../../images/island/configuration_page/import_export_configuration.png "Import/export configuration")
+![Import/export configuration](../../images/island/configuration-page/import-export-configuration.png "Import/export configuration")

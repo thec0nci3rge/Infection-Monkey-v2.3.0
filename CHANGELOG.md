@@ -10,6 +10,7 @@ Changelog](https://keepachangelog.com/en/1.0.0/).
 - Configurable Island port through node proxy server. #3827
 - Ability to change wallpaper as part of the ransomware simulation on Windows.
   #1247
+- Ability to add IP ranges when specifying blocked IPs. #4276
 
 ### Changed
 - Response from `PUT /api/propagation-credentials/configured-credentials`
@@ -29,6 +30,19 @@ Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Removed
 - Fingerprinter configuration from UI. #3769, #3826
+- RDP exploiter plugin. #4252
+- Hadoop exploiter plugin. #4253
+- WMI exploiter plugin. #4254
+- MSSQL exploiter plugin. #4255
+- PowerShell exploiter plugin. #4256
+- Log4Shell exploiter plugin. #4257
+- SNMP exploiter plugin. #4258
+- Zerologon exploiter plugin. #4259
+- Mimikatz credentials collector plugin. #4261
+- Chrome credentials collector plugin. #4262
+- SSH credentials collector plugin. #4263
+- Cryptojacker payload plugin. #4264
+- Ransomware payload plugin. #4265
 
 ### Security
 

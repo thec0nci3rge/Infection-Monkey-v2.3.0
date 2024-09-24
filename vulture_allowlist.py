@@ -1,19 +1,3 @@
-from aardwolf.commons.iosettings import RDPIOSettings
-from agent_plugins.credentials_collectors.chrome.utils import BrowserCredentialsDatabasePath
-from agent_plugins.exploiters.hadoop.plugin import Plugin as HadoopPlugin
-from agent_plugins.exploiters.rdp.in_memory_file_provider import InMemoryFileProvider
-from agent_plugins.exploiters.smb.plugin import Plugin as SMBPlugin
-from agent_plugins.exploiters.snmp.src.snmp_exploit_client import SNMPResult
-from agent_plugins.exploiters.wmi.plugin import Plugin as WMIPlugin
-from agent_plugins.exploiters.zerologon.src.HostExploiter import HostExploiter
-from agent_plugins.payloads.cryptojacker.src import cpu_utilizer, cryptojacker, memory_utilizer
-from agent_plugins.payloads.ransomware.src.ransomware_options import (
-    EncryptionBehavior,
-    RansomwareOptions,
-    linux_target_dir,
-    windows_target_dir,
-)
-from asyauth.monkeytypes import UniCredential
 from flask_security import Security
 
 from common.agent_configuration import ScanTargetConfiguration
@@ -28,11 +12,9 @@ from infection_monkey.command_builders import (
     LinuxAgentCommandBuilder,
     WindowsAgentCommandBuilder,
 )
-from infection_monkey.exploit.log4shell_utils.ldap_server import LDAPServerFactory
 from infection_monkey.exploit.tools import secret_type_filter
-from infection_monkey.exploit.zerologon import NetrServerPasswordSet, NetrServerPasswordSetResponse
-from infection_monkey.exploit.zerologon_utils.remote_shell import RemoteShell
 from infection_monkey.network.firewall import FirewallApp, WinAdvFirewall, WinFirewall
+from infection_monkey.propagation_credentials_repository import PropagationCredentialsRepository
 from infection_monkey.utils import commands
 from monkey_island.cc.deployment import Deployment
 from monkey_island.cc.models import Machine
@@ -60,23 +42,12 @@ AgentPluginManifest.remediation_suggestion
 AgentPluginManifest.target_operating_systems
 AgentPluginManifest.supported_operating_systems
 
-# Used by third party library
-LDAPServerFactory.buildProtocol
-NetrServerPasswordSet.structure
-NetrServerPasswordSetResponse.structure
-NetrServerPasswordSet.opnum
-
 # Passed to Popen from agent
 dwFlags  # \infection_monkey\monkey\infection_monkey\monkey.py:490:
 wShowWindow  # \infection_monkey\monkey\infection_monkey\monkey.py:491:
 
 # Attribute used by pydantic errors
 msg_template
-
-# Zerologon uses this to restore password:
-RemoteShell.do_get
-RemoteShell.do_exit
-prompt
 
 FirewallApp.listen_allowed
 WinAdvFirewall.listen_allowed
@@ -116,22 +87,6 @@ MonkeyExploitation.label
 AgentPlugin.dump_source_archive
 AgentPlugin.supported_operating_systems
 
-BrowserCredentialsDatabasePath.database_file_path
-
-HadoopPlugin
-SMBPlugin
-WMIPlugin
-
-HostExploiter.add_vuln_url
-
-EncryptionBehavior.validate_file_extension
-EncryptionBehavior.validate_linux_target_dir
-EncryptionBehavior.validate_windows_target_dir
-RansomwareOptions.encryption
-RansomwareOptions.other_behaviors
-linux_target_dir
-windows_target_dir
-
 
 # User model fields
 User.active
@@ -143,9 +98,6 @@ User.email
 identity_type_filter
 secret_type_filter
 
-SNMPResult.errorIndex
-SNMPResult.varBinds
-
 commands.build_agent_deploy_command
 commands.build_agent_download_command
 commands.build_command_windows_powershell
@@ -153,6 +105,8 @@ commands.build_download_command_linux_curl
 commands.build_dropper_script_download_command
 commands.build_download_command_windows_powershell_webclient
 commands.build_download_command_windows_powershell_webrequest
+
+PropagationCredentialsRepository.get_credentials
 
 # Remove after the plugin interface is in place
 AgentPluginMetadata.resource_path
@@ -168,17 +122,22 @@ AgentPluginRepositoryIndex._sort_plugins_by_version
 AgentPluginRepositoryIndex.use_enum_values
 AgentPluginRepositoryIndex._convert_str_type_to_enum
 
-# RDP
-InMemoryFileProvider.get_file_data
-InMemoryFileProvider.get_file_size
-UniCredential.stype
-RDPIOSettings.video_width
-RDPIOSettings.video_height
-RDPIOSettings.video_bpp_max
-RDPIOSettings.video_out_format
-RDPIOSettings.clipboard_use_pyperclip
-
 AgentPluginService.install_agent_plugin_from_repository
+
+AgentCommandBuilderFactory.create_windows_agent_command_builder
+AgentCommandBuilderFactory.create_linux_agent_command_builder
+
+LinuxAgentCommandBuilder.build_download_command
+LinuxAgentCommandBuilder.build_set_permissions_command
+LinuxAgentCommandBuilder.build_run_command
+LinuxAgentCommandBuilder.get_command
+LinuxAgentCommandBuilder.reset_command
+
+WindowsAgentCommandBuilder.build_download_command
+WindowsAgentCommandBuilder.build_run_command
+WindowsAgentCommandBuilder.get_command
+WindowsAgentCommandBuilder.reset_command
 
 # TODO: Remove after we move the plugins to separate repos
 execute_agent
+LinuxAgentCommandBuilder.build_permission_change_command

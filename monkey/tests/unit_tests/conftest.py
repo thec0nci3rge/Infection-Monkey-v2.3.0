@@ -22,16 +22,6 @@ def data_for_tests_dir(pytestconfig):
 
 
 @pytest.fixture(scope="session")
-def stable_file(data_for_tests_dir) -> Path:
-    return data_for_tests_dir / "stable_file.txt"
-
-
-@pytest.fixture(scope="session")
-def stable_file_sha256_hash() -> str:
-    return "d9dcaadc91261692dafa86e7275b1bf39bb7e19d2efcfacd6fe2bfc9a1ae1062"
-
-
-@pytest.fixture(scope="session")
 def agent_plugin_repository_index_file(data_for_tests_dir) -> Path:
     return data_for_tests_dir / "agent_plugin" / "agent_plugin_repository_index.yml"
 

@@ -3,7 +3,7 @@ from typing import Annotated, Dict, Tuple
 from monkeytypes import MutableInfectionMonkeyBaseModel, NetworkPort
 from pydantic import BeforeValidator, Field, PositiveFloat
 
-from .validators import validate_ip, validate_subnet_range
+from .validators import validate_subnet_range
 
 
 def _subnet_validator(subnet_range: str):
@@ -11,13 +11,7 @@ def _subnet_validator(subnet_range: str):
     return subnet_range
 
 
-def _ip_validator(ip: str):
-    validate_ip(ip)
-    return ip
-
-
 Subnet = Annotated[str, BeforeValidator(_subnet_validator)]
-BlockedIP = Annotated[str, BeforeValidator(_ip_validator)]
 
 
 class ScanTargetConfiguration(MutableInfectionMonkeyBaseModel):
@@ -30,8 +24,9 @@ class ScanTargetConfiguration(MutableInfectionMonkeyBaseModel):
         :param subnets: Subnet ranges to scan
                         Example: ("192.168.1.1-192.168.2.255", "3.3.3.3", "2.2.2.2/24",
                                   "myHostname")
-        :param blocked_ips: IP's that won't be scanned
-                            Example: ("1.1.1.1", "2.2.2.2")
+        :param blocked_ips: IPs that won't be scanned
+                            Example: ("192.168.1.1-192.168.2.255", "1.1.1.1", "2.2.2.2/24",
+                                  "stayAwayHostname")
         :param inaccessible_subnets: Subnet ranges that shouldn't be accessible for the agent
                                      Example: ("1.1.1.1", "2.2.2.2/24", "myserver")
     """
@@ -55,9 +50,16 @@ class ScanTargetConfiguration(MutableInfectionMonkeyBaseModel):
         '\tTarget a specific host: "printer.example"',
         default=[],
     )
-    blocked_ips: Tuple[BlockedIP, ...] = Field(
+    blocked_ips: Tuple[Subnet, ...] = Field(
         title="Blocked IPs",
-        description="List of IPs that the monkey will not scan.",
+        description="List of IPs that the monkey will not scan. Values can be "
+        "IPs, subnets or hosts. "
+        "Examples:\n"
+        '\tBlock a specific IP: "192.168.0.1"\n'
+        "\tBlock a subnet using a network range: "
+        '"192.168.0.5-192.168.0.20"\n'
+        '\tBlock a subnet using an IP mask: "192.168.0.5/24"\n'
+        '\tBlock a specific host: "printer.example"',
         default=[],
     )
     inaccessible_subnets: Tuple[Subnet, ...] = Field(

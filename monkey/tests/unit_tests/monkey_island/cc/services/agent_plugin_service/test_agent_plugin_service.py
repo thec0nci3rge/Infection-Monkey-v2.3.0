@@ -67,7 +67,7 @@ CREDENTIALS_COLLECTORS = {
             "resource_path": "Mimikatz-credentials_collector-v1.0.2.tar",
             # SHA of PLUGIN_ARCHIVE
             "sha256": "315f5bdb76d078c43b8ac0064e4a0164612b1fce77c869345bfc94c75894edd3",
-            "description": "Collects credentials from Windows Credential Manager using Mimikatz.",
+            "description": "Collects credentials from memory on Windows hosts using Mimikatz.",
             "version": "1.0.2",
             "safe": True,
         }
@@ -86,18 +86,6 @@ EXPECTED_SERIALIZED_AGENT_PLUGIN_REPOSITORY_INDEX = {
     },
 }
 
-EXPECTED_SERIALIZED_AGENT_PLUGIN_REPOSITORY_SIMPLE_INDEX = {
-    "timestamp": 1692629886.4792287,
-    "compatible_infection_monkey_version": "development",
-    "plugins": {
-        "Credentials_Collector": {},
-        "Exploiter": {
-            "SSH": SSH_EXPLOITER,
-        },
-        "Fingerprinter": {},
-        "Payload": {},
-    },
-}
 
 AGENT_PLUGIN_REPOSITORY_INDEX_FILE_URL = f"{AGENT_PLUGIN_REPOSITORY_DEVELOP_URL}/index.yml"
 

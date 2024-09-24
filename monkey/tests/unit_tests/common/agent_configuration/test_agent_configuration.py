@@ -39,7 +39,13 @@ def test_scan_target_configuration():
 
 
 @pytest.mark.parametrize(
-    "invalid_blocked_ip_list, error", [(["abc"], ValueError), ([1], TypeError)]
+    "invalid_blocked_ip_list, error",
+    [
+        (["1-2-3"], ValueError),
+        (["0.0.0.0/33"], ValueError),
+        (["www.invalid-.com"], ValueError),
+        ([1], TypeError),
+    ],
 )
 def test_scan_target_configuration__invalid_blocked_ips(invalid_blocked_ip_list, error):
     invalid_blocked_ips = SCAN_TARGET_CONFIGURATION.copy()

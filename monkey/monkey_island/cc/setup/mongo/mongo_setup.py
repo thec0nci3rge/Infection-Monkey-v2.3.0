@@ -18,6 +18,9 @@ MINIMUM_MONGO_DB_VERSION_REQUIRED = "4.2.0"
 
 logger = logging.getLogger(__name__)
 
+# Suppress (most) pymongo logging
+logging.getLogger("pymongo").setLevel(logging.WARNING)
+
 
 def start_mongodb(data_dir: Path) -> MongoDbProcess:
     db_dir = _create_db_dir(data_dir)

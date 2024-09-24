@@ -1,9 +1,7 @@
 ---
 title: "AWS"
-date: 2020-05-26T20:57:36+03:00
 draft: false
 pre: '<i class="fab fa-aws"></i> '
-weight: 5
 tags: ["setup", "aws"]
 ---
 
@@ -20,22 +18,24 @@ On the [Infection Monkey's AWS Marketplace page](https://aws.amazon.com/marketpl
 
 At this point, AWS will instance and deploy the new machine.
 
-When ready, you can browse to the Infection Monkey running on the fresh deployment at:
+When ready, you can browse to Infection Monkey running on the fresh deployment at:
 
 `https://{public-ip}`
 
 To login to the machine, use *ubuntu* username.
 
-Once you have access to the Monkey Island server, check out the [getting started page]({{< ref "/usage/getting-started" >}}).
+Once you have access to the Monkey Island server, check out the [getting
+started page](/usage/getting-started).
 
 ## Configuration
 
-AWS EC2 instance is running the AppImage deployment of the Infection Monkey. To configure the VM, shell
-into it and follow configuration instructions in the [Linux setup section]({{< ref "/setup/linux#configuring-the-server" >}}).
+AWS EC2 instance is running the AppImage deployment of Infection Monkey. To configure the VM, shell
+into it and follow configuration instructions in the [Linux setup
+section](/setup/linux#configuring-the-server).
 
 ## Integration with AWS services
 
-The Infection Monkey has built-in integrations with AWS that allows running Agents on EC2 instances.
+Infection Monkey has built-in integrations with AWS that allows running Agents on EC2 instances.
 See [Usage -> Integrations](../../usage/integrations) for more details.
 
 ## Upgrading
@@ -46,4 +46,4 @@ To get an updated version, you can deploy a new machine from the marketplace.
 If you'd like to keep your existing configuration, you can export it to a file
 using the *Export config* button and then import it to the new Monkey Island.
 
-![Import/export configuration](../../images/island/configuration_page/import_export_configuration.png "Import/export configuration")
+![Import/export configuration](../../images/island/configuration-page/import-export-configuration.png "Import/export configuration")

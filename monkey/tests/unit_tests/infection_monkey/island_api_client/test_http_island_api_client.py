@@ -20,7 +20,7 @@ from tests.common.fake_manifests import FAKE_AGENT_MANIFEST_DICT, FAKE_MANIFEST_
 from tests.data_for_tests.otp import TEST_OTP
 from tests.data_for_tests.propagation_credentials import CREDENTIALS_DICTS
 
-from common import AgentRegistrationData, AgentSignals
+from common import AgentSignals
 from common.agent_configuration import AgentConfiguration
 from common.agent_events import AgentEventSerializerRegistry
 from common.common_consts.token_keys import ACCESS_TOKEN_KEY_NAME, TOKEN_TTL_KEY_NAME
@@ -39,29 +39,8 @@ SERVER = SocketAddress(ip="1.1.1.1", port=9999)
 WINDOWS = "windows"
 AGENT_ID = UUID("80988359-a1cd-42a2-9b47-5b94b37cd673")
 AGENT_SHA256 = "7f295ebba73b2f549f98b9c35ae588f153283476ac8f087cc75d9c4788795d82"
-AGENT_REGISTRATION = AgentRegistrationData(
-    id=AGENT_ID,
-    machine_hardware_id=1,
-    start_time=0,
-    parent_id=None,
-    cc_server=SERVER,
-    network_interfaces=[],
-    sha256=AGENT_SHA256,
-)
 
 TIMESTAMP = 123456789
-
-ISLAND_URI = f"https://{SERVER}/api?action=is-up"
-ISLAND_SEND_LOG_URI = f"https://{SERVER}/api/agent-logs/{AGENT_ID}"
-ISLAND_GET_AGENT_BINARY_URI = f"https://{SERVER}/api/agent-binaries/{WINDOWS}"
-ISLAND_SEND_EVENTS_URI = f"https://{SERVER}/api/agent-events"
-ISLAND_REGISTER_AGENT_URI = f"https://{SERVER}/api/agents"
-ISLAND_AGENT_STOP_URI = f"https://{SERVER}/api/monkey-control/needs-to-stop/{AGENT_ID}"
-ISLAND_GET_CONFIG_URI = f"https://{SERVER}/api/agent-configuration"
-ISLAND_GET_AGENT_CONFIGURATION_SCHEMA_URI = f"https://{SERVER}/api/agent-configuration-schema"
-ISLAND_GET_PROPAGATION_CREDENTIALS_URI = f"https://{SERVER}/api/propagation-credentials"
-ISLAND_GET_AGENT_SIGNALS = f"https://{SERVER}/api/agent-signals/{AGENT_ID}"
-ISLAND_SEND_HEARTBEAT_URI = f"https://{SERVER}/api/agent/{AGENT_ID}/heartbeat"
 
 
 class Event1(AbstractAgentEvent):

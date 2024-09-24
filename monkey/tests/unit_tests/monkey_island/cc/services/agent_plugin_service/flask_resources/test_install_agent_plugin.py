@@ -17,7 +17,6 @@ from monkey_island.cc.services.agent_plugin_service.flask_resources.install_agen
 AGENT_PLUGIN = b"SomePlugin"
 PLUGIN_TYPE = "Exploiter"
 PLUGIN_NAME = "RDP"
-VERSION_DICT = {"major": "1", "minor": "0", "patch": "1"}
 VERSION = "1.0.1"
 REQUEST_JSON_DATA = (
     f'{{"plugin_type": "{PLUGIN_TYPE}", "name": "{PLUGIN_NAME}", "version": "{VERSION}"}}'

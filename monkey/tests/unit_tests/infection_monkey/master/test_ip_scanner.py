@@ -16,9 +16,6 @@ from common.agent_configuration.agent_sub_configurations import (
 from infection_monkey.master import IPScanner
 from infection_monkey.network import NetworkAddress
 
-WINDOWS_OS = OperatingSystem.WINDOWS
-LINUX_OS = OperatingSystem.LINUX
-
 
 @pytest.fixture
 def scan_config(default_agent_configuration):

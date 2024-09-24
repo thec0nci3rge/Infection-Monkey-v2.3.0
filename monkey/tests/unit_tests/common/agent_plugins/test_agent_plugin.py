@@ -36,12 +36,6 @@ FAKE_ZEROLOGON_PLUGIN_CONFIG_SCHEMA = {
     }
 }
 
-FAKE_ZEROLOGON_PLUGIN_CONFIG = {
-    "attempt_count": 2000,
-    "password_to_set": "SeCuRe",
-    "dc_ip_address": "localhost",
-}
-
 FAKE_ZEROLOGON_PLUGIN_ARCHIVE = b"random bytes"
 
 FAKE_ZEROLOGON_HOST_OS = (OperatingSystem.LINUX, OperatingSystem.WINDOWS)

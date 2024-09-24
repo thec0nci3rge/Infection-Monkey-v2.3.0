@@ -93,6 +93,30 @@ def test_build_run_command_none(
 
 
 @pytest.mark.parametrize(
+    "shell, otp_included", [(WindowsShell.CMD, True), (WindowsShell.POWERSHELL, False)]
+)
+def test_build_run_command_otp(
+    windows_agent_command_builder: IWindowsAgentCommandBuilder,
+    shell: WindowsShell,
+    otp_included: bool,
+    agent_otp_environment_variable: str,
+):
+    windows_run_options = WindowsRunOptions(
+        agent_destination_path=AGENT_DESTINATION_PATH,
+        dropper_execution_mode=DropperExecutionMode.NONE,
+        shell=shell,
+        include_otp=otp_included,
+    )
+
+    windows_agent_command_builder.build_run_command(windows_run_options)
+    actual_command = windows_agent_command_builder.get_command()
+    if otp_included:
+        assert agent_otp_environment_variable in actual_command
+    else:
+        assert agent_otp_environment_variable not in actual_command
+
+
+@pytest.mark.parametrize(
     "shell, expected_otp_set",
     [
         (WindowsShell.CMD, "set"),

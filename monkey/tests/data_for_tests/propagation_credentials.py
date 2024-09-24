@@ -58,19 +58,7 @@ CREDENTIALS = [
     for identity, secret in product(IDENTITIES, SECRETS)
 ]
 
-FULL_CREDENTIALS = [
-    credentials
-    for credentials in CREDENTIALS
-    if not (credentials.identity is None and credentials.secret is None)
-]
-
 CREDENTIALS_DICTS = [
     {"identity": identity, "secret": secret}
     for identity, secret in product(IDENTITY_DICTS, SECRET_DICTS)
-]
-
-FULL_CREDENTIALS_DICTS = [
-    credentials
-    for credentials in CREDENTIALS_DICTS
-    if not (credentials["identity"] is None and credentials["secret"] is None)
 ]

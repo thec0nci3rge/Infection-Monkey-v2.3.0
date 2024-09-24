@@ -121,34 +121,6 @@ dead_host_scan_results = IPScanResults(
     {},
 )
 
-dot_1_services = {
-    "tcp-445": {
-        "name": "smb_service_name",
-        "display_name": "unknown(TCP)",
-        "port": 445,
-        "banner": "SMB BANNER",
-    },
-    "tcp-3389": {"display_name": "unknown(TCP)", "port": 3389, "banner": ""},
-}
-
-dot_3_services = {
-    "tcp-22": {"name": "SSH", "display_name": "unknown(TCP)", "port": 22, "banner": "SSH BANNER"},
-    "tcp-80": {"name": "http", "data": ("SERVER_HEADERS", False)},
-    "tcp-443": {
-        "name": "http",
-        "display_name": "unknown(TCP)",
-        "port": 443,
-        "banner": "HTTPS BANNER",
-        "data": ("SERVER_HEADERS_2", True),
-    },
-}
-
-os_windows = "windows"
-
-os_linux = "linux"
-
-SERVERS = ["127.0.0.1:5000", "10.10.10.10:5007"]
-
 
 @pytest.fixture
 def mock_ip_scanner():

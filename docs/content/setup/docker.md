@@ -1,15 +1,13 @@
 ---
 title: "Docker"
-date: 2020-05-26T20:57:28+03:00
 draft: false
 pre: '<i class="fab fa-docker"></i> '
-weight: 4
 tags: ["setup", "docker", "linux"]
 ---
 
 ## Supported operating systems
 
-The Infection Monkey Docker container works on Linux only. It is not compatible with Docker for Windows or Docker for Mac.
+The Infection Monkey Docker image works on Linux only. It is not compatible with Docker for Windows or Docker for Mac.
 
 ## Deployment
 
@@ -23,12 +21,12 @@ The Infection Monkey Docker container works on Linux only. It is not compatible 
 1. Pull the Monkey Island Docker image:
 
     ```bash
-    sudo docker pull infectionmonkey/monkey_island:latest
+    sudo docker pull infectionmonkey/monkey-island:latest
     ```
 
 ### 2. Start MongoDB
 {{% notice info %}}
-If you are upgrading the Infection Monkey to a new version, be sure to remove
+If you are upgrading Infection Monkey to a new version, be sure to remove
 any MongoDB containers or volumes associated with the previous version.
 {{% /notice %}}
 
@@ -38,7 +36,7 @@ any MongoDB containers or volumes associated with the previous version.
     sudo docker run \
         --name monkey-mongo \
         --network=host \
-        --volume db:/data/db \
+        --volume monkey-db:/data/db \
         --detach \
         mongo:6.0
     ```
@@ -65,12 +63,12 @@ been signed by a private certificate authority.
 
 After the Monkey Island docker container starts, you can access Monkey Island by pointing your browser at `https://localhost`.
 
-Once you have access to the Monkey Island server, check out the [getting started page]({{< ref "/usage/getting-started" >}}).
+Once you have access to the Monkey Island server, check out the [getting started page](/usage/getting-started).
 
 ## Configuring the server
 
 You can configure the server by mounting a volume and specifying a
- [server configuration file](../../reference/server_configuration):
+ [server configuration file](../../reference/server-configuration):
 
 1. Create a directory for server configuration file, e.g. `monkey_island_data`:
     ```bash
@@ -141,7 +139,7 @@ private certificate authority.
     chmod 600 <PATH_TO_KEY_FILE>
     chmod 600 <PATH_TO_CRT_FILE>
     ```
-1. Modify the [server configuration file](../../reference/server_configuration) to look like:
+1. Modify the [server configuration file](../../reference/server-configuration) to look like:
     ```json
     {
         "data_dir": "/monkey_island_data",
@@ -170,7 +168,7 @@ private certificate authority.
 ### Change logging level
 
 1. Stop the docker container if it's already running.
-1. Modify the [server configuration file](../../reference/server_configuration) by adding the following lines:
+1. Modify the [server configuration file](../../reference/server-configuration) by adding the following lines:
     ```json
     {
         "log_level": "INFO"
@@ -199,7 +197,7 @@ again with the new file.
 If you'd like to keep your existing configuration, you can export it to a file
 using the *Export config* button and then import it to the new Monkey Island.
 
-![Import/export configuration](../../images/island/configuration_page/import_export_configuration.png "Import/export configuration")
+![Import/export configuration](../../images/island/configuration-page/import-export-configuration.png "Import/export configuration")
 
 ## Troubleshooting
 

@@ -2,7 +2,7 @@ compatible_infection_monkey_version: development
 plugins:
   Credentials_Collector:
     Mimikatz:
-    - description: Collects credentials from Windows Credential Manager using Mimikatz.
+    - description: Collects credentials from memory on Windows hosts using Mimikatz.
       name: Mimikatz
       resource_path: Mimikatz-credentials_collector-v1.0.2.tar
       safe: true

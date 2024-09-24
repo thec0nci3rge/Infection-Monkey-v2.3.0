@@ -1,15 +1,15 @@
 ---
 title: "Credentials"
-date: 2020-06-09T12:20:08+03:00
 draft: false
-description: "Configure credentials that the Infection Monkey will use for propagation."
+description: "Configure credentials that Infection Monkey will use for propagation."
+pre: "<i class='fas fa-key'></i> "
 ---
 
 On this screen, you can configure credentials for Infection Monkey to use when attempting
 brute-force attacks. These can be anything from default or weak passwords, to "stolen"
 credentials from your network, simulating an attacker with inside knowledge.
 
-![Configure credentials](/images/island/configuration_page/credentials_configuration.png "Configure credentials")
+![Configure credentials](/images/island/configuration-page/credentials-configuration.png "Configure credentials")
 
 The "Identity" field accepts usernames and email addresses. As seen in the screenshot, the
 supported secret types are passwords, LM hashes, NTLM hashes, and SSH keys.
@@ -35,4 +35,4 @@ The combinations will be tried in the following order:
 1. `user-3:110D0C51E144D36FB7E4F9E012FBB888` (generated credential combination)
 1. `user-3:hello123` (generated credential combination)
 
-![Order of configure credentials](/images/island/configuration_page/credentials_configuration_order.png "Order of configured credentials")
+![Order of configure credentials](/images/island/configuration-page/credentials-configuration-order.png "Order of configured credentials")

@@ -14,8 +14,6 @@ from monkey_island.cc.services.agent_plugin_service import IAgentPluginService
 from monkey_island.cc.services.agent_plugin_service.agent_plugin_service import AgentPluginService
 from monkey_island.cc.services.agent_plugin_service.flask_resources import AgentPlugins
 
-FAKE_PLUGIN_NAME = "plugin_abc"
-
 
 @pytest.fixture
 def agent_plugin_repository():

@@ -1,8 +1,6 @@
 ---
 title: "Development setup"
-date: 2020-06-08T19:53:00+03:00
 draft: false
-weight: 5
 tags: ["contribute"]
 ---
 
@@ -10,7 +8,7 @@ tags: ["contribute"]
 
 To set up a development environment using scripts, look at the readme under [`/deployment_scripts`](https://github.com/guardicore/monkey/blob/master/deployment_scripts). If you want to set it up manually or run into problems, keep reading.
 
-## The Infection Monkey Agent
+## Infection Monkey Agent
 
 The Agent (which we sometimes refer to as the Monkey) is a single Python project under the [`infection_monkey`](https://github.com/guardicore/monkey/blob/master/monkey/infection_monkey) folder. The Infection Monkey Agent was built for Python 3.11. You can get it up and running by using[`pipenv`](https://pypi.org/project/pipenv/).
 
@@ -25,7 +23,7 @@ Follow these steps to install the requirements-
 - Do a `find` to find all files named 'Pipfile'
 - For each `Pipfile`, cd to that directory and run `pipenv sync`
 
-In order to compile the Infection Monkey for distribution by the Monkey Island, you'll need to run the instructions listed in the [`readme.txt`](https://github.com/guardicore/monkey/tree/master/monkey/infection_monkey) on each supported environment.
+In order to compile Infection Monkey for distribution by the Monkey Island, you'll need to run the instructions listed in the [`readme.txt`](https://github.com/guardicore/monkey/tree/master/monkey/infection_monkey) on each supported environment.
 
 This means setting up an environment with Linux 64-bit with Python installed and a Windows 64-bit machine with developer tools, along with 64-bit Python versions.
 

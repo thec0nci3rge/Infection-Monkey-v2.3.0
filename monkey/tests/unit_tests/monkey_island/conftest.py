@@ -21,11 +21,6 @@ from monkey_island.cc.services.authentication_service.user import User
 from monkey_island.cc.services.representations import output_json
 
 
-@pytest.fixture(scope="module")
-def server_configs_dir(data_for_tests_dir):
-    return os.path.join(data_for_tests_dir, "server_configs")
-
-
 @pytest.fixture
 def create_empty_tmp_file(tmpdir: str) -> Callable:
     def inner(file_name: str):

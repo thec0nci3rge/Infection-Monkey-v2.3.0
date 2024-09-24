@@ -197,14 +197,6 @@ ISSUE_3 = {
     "password_restored": True,
 }
 
-ISSUE_4 = {
-    "machine_id": 10,
-    "machine": "hadoop-4",
-    "ip_address": "10.2.2.4",
-    "type": "non existent",
-    "password_restored": True,
-}
-
 
 def get_machine_by_id(machine_id):
     return [machine for machine in MACHINES if machine_id == machine.id][0]

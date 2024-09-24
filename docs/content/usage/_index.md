@@ -1,13 +1,13 @@
-+++
-title = "Usage"
-date = 2020-05-26T20:57:53+03:00
-weight = 10
-chapter = true
-pre = '<i class="fas fa-users-cog"></i> '
-+++
+---
+title: "Usage"
+chapter: true
+pre: '<i class="fas fa-users-cog"></i> '
+weight: 40
+---
 
 # Usage
 
-If you're new to the Infection Monkey, check out our [Getting Started](getting-started) page.
+If you're new to Infection Monkey, check out our [Getting Started](getting-started) page.
 
-If you haven't downloaded the Infection Monkey yet, {{% button href="https://www.akamai.com/infectionmonkey#download" icon="fas fa-download" %}}Get Infection Monkey here{{% /button %}}!
+If you haven't downloaded Infection Monkey yet,
+{{% button href="https://github.com/guardicore/monkey/releases/latest" icon="fas fa-download" %}}Get Infection Monkey here{{% /button %}}!

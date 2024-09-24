@@ -6,12 +6,7 @@ from typing import Sequence
 import pytest
 from monkeytypes import Credentials, LMHash, NTHash, Password, SSHKeypair, Username
 from pydantic import SecretStr
-from tests.data_for_tests.propagation_credentials import (
-    CREDENTIALS,
-    PASSWORD_1,
-    PASSWORD_3,
-    USERNAME,
-)
+from tests.data_for_tests.propagation_credentials import CREDENTIALS, PASSWORD_1, USERNAME
 from tests.unit_tests.infection_monkey.base_island_api_client import BaseIslandAPIClient
 
 from infection_monkey.island_api_client import IIslandAPIClient
@@ -57,13 +52,6 @@ STOLEN_SSH_KEYS_CREDENTIALS = [
     Credentials(
         identity=Username(username=USERNAME),
         secret=SSHKeypair(public_key=STOLEN_PUBLIC_KEY_2, private_key=STOLEN_PRIVATE_KEY_2),
-    )
-]
-
-NEW_CREDENTIALS = [
-    Credentials(
-        identity=Username(username="new"),
-        secret=Password(password=PASSWORD_3),
     )
 ]
 

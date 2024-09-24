@@ -1,8 +1,6 @@
 ---
 title: "Running Manually"
-date: 2022-06-09T14:47:40+03:00
 draft: false
-weight: 2
 pre: "<i class='fas fa-terminal'></i> "
 tags: ["usage"]
 ---
@@ -18,7 +16,7 @@ password (OTP). OTPs can be used exactly once and expire after 2 minutes. The
 commands on the "Run Monkey" -> "Manual" page are updated with a valid OTP each
 time a command is copied or the OTP expires.
 
-![Manual run command](/images/island/run_monkey_page/run_monkey_on_machine.png "Manual run command")
+![Manual run command](/images/island/run-monkey-page/run-monkey-on-machine.png "Manual run command")
 
 ### Downloading the Agent manually
 

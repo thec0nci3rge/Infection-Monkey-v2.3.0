@@ -34,7 +34,7 @@ class WindowsAgentCommandBuilder(IWindowsAgentCommandBuilder):
     def build_download_command(self, download_options: WindowsDownloadOptions):
         if download_options.download_method == WindowsDownloadMethod.WEB_REQUEST:
             download_command_func = self._build_download_command_webrequest
-        if download_options.download_method == WindowsDownloadMethod.WEB_CLIENT:
+        elif download_options.download_method == WindowsDownloadMethod.WEB_CLIENT:
             download_command_func = self._build_download_command_webclient
 
         # We always download using powershell since CMD doesn't have
@@ -68,15 +68,17 @@ class WindowsAgentCommandBuilder(IWindowsAgentCommandBuilder):
             if run_options.shell == WindowsShell.CMD:
                 self._command += "cmd.exe /c "
 
-        if run_options.shell == WindowsShell.POWERSHELL:
-            set_otp = self._set_otp_powershell
-        if run_options.shell == WindowsShell.CMD:
-            set_otp = self._set_otp_cmd
+        if run_options.include_otp:
+            if run_options.shell == WindowsShell.POWERSHELL:
+                set_otp = self._set_otp_powershell
+            elif run_options.shell == WindowsShell.CMD:
+                set_otp = self._set_otp_cmd
+            self._command += f"{set_otp()} "
 
-        self._command += f"{set_otp()} {str(run_options.agent_destination_path)} "
+        self._command += f"{str(run_options.agent_destination_path)}"
 
         if run_options.dropper_execution_mode != DropperExecutionMode.SCRIPT:
-            self._command += self._build_agent_run_arguments(run_options)
+            self._command += " " + self._build_agent_run_arguments(run_options)
 
     def _set_otp_powershell(self) -> str:
         return f"$env:{self._agent_otp_environment_variable}='{self._otp_provider.get_otp()}';"

@@ -1,9 +1,7 @@
 ---
 title: "Azure"
-date: 2020-05-26T20:57:39+03:00
 draft: false
 pre: '<i class="fab fa-microsoft"></i> '
-weight: 6
 tags: ["setup", "azure"]
 ---
 
@@ -24,16 +22,16 @@ Select the [Infection Monkey from the Azure Marketplace](https://azuremarketplac
     1. Review the details of the offer and click **Create**.
 
 At this point, Azure will provision and deploy your new machine. When ready,
-you can browse to the Infection Monkey running on your fresh deployment at:
+you can browse to Infection Monkey running on your fresh deployment at:
 
 `https://{public-ip-address}`
 
-Once you have access to the Monkey Island server, check out the [getting started page]({{< ref "/usage/getting-started" >}}).
+Once you have access to the Monkey Island server, check out the [getting started page](/usage/getting-started).
 
 ## Configuration
 
-Azure VM is running the AppImage deployment of the Infection Monkey. To configure the VM, shell
-into it and follow configuration instructions in the [Linux setup section]({{< ref "/setup/linux#configuring-the-server" >}}).
+Azure VM is running the AppImage deployment of Infection Monkey. To configure the VM, shell
+into it and follow configuration instructions in the [Linux setup section](/setup/linux#configuring-the-server).
 
 ## Upgrading
 
@@ -43,4 +41,4 @@ To get the updated version, you can deploy a new machine from the marketplace.
 If you'd like to keep your existing configuration, you can export it to a file
 using the *Export config* button and then import it to the new Monkey Island.
 
-![Import/export configuration](../../images/island/configuration_page/import_export_configuration.png "Import/export configuration")
+![Import/export configuration](../../images/island/configuration-page/import-export-configuration.png "Import/export configuration")

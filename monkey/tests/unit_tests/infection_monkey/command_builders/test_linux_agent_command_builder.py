@@ -8,6 +8,7 @@ from agentpluginapi import (
     LinuxDownloadMethod,
     LinuxDownloadOptions,
     LinuxRunOptions,
+    LinuxSetPermissionsOptions,
 )
 from monkeytypes import AgentID
 
@@ -55,8 +56,30 @@ def test_build_download_command(
 
     assert expected_method in actual_command
     assert not_expected_method not in actual_command
-    assert "chmod" in actual_command
     assert EXPECTED_AGENT_DESTINATION_PATH in actual_command
+
+
+@pytest.mark.parametrize(
+    "permissions, expected_command",
+    [
+        (0o777, f"chmod 777 {AGENT_DESTINATION_PATH}; "),
+        (0o700, f"chmod 700 {AGENT_DESTINATION_PATH}; "),
+        (0o550, f"chmod 550 {AGENT_DESTINATION_PATH}; "),
+    ],
+)
+def test_build_set_permissions_command(
+    linux_agent_command_builder: ILinuxAgentCommandBuilder,
+    permissions: int,
+    expected_command: str,
+):
+    linux_set_permissions_options = LinuxSetPermissionsOptions(
+        agent_destination_path=AGENT_DESTINATION_PATH, permissions=permissions
+    )
+
+    linux_agent_command_builder.build_set_permissions_command(linux_set_permissions_options)
+    actual_command = linux_agent_command_builder.get_command()
+
+    assert actual_command == expected_command
 
 
 def test_build_run_command_none(
@@ -101,6 +124,28 @@ def test_build_run_command_dropper(
     assert DROPPER_ARG in actual_command
     assert EXPECTED_AGENT_DESTINATION_PATH in actual_command
     assert EXPECTED_DROPPER_DESTINATION_PATH in actual_command
+
+
+@pytest.mark.parametrize("otp_included", [True, False])
+def test_build_run_command_otp(
+    linux_agent_command_builder: ILinuxAgentCommandBuilder,
+    otp: str,
+    otp_included,
+):
+    linux_run_options = LinuxRunOptions(
+        agent_destination_path=AGENT_DESTINATION_PATH,
+        dropper_execution_mode=DropperExecutionMode.DROPPER,
+        dropper_destination_path=DROPPER_DESTINATION_PATH,
+        include_otp=otp_included,
+    )
+
+    linux_agent_command_builder.build_run_command(linux_run_options)
+    actual_command = linux_agent_command_builder.get_command()
+
+    if otp_included:
+        assert otp in actual_command
+    else:
+        assert otp not in actual_command
 
 
 def test_build_run_command_script(

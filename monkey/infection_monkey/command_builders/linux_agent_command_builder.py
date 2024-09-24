@@ -8,6 +8,7 @@ from agentpluginapi import (
     LinuxDownloadMethod,
     LinuxDownloadOptions,
     LinuxRunOptions,
+    LinuxSetPermissionsOptions,
 )
 from monkeytypes import AgentID
 
@@ -42,30 +43,29 @@ class LinuxAgentCommandBuilder(ILinuxAgentCommandBuilder):
     def _build_download_command_wget(
         self, download_url: str, destination_path: PurePosixPath
     ) -> str:
-        return (
-            f"wget -qO {destination_path} {download_url}; "
-            f"{self._set_permissions_command(destination_path)}; "
-        )
+        return f"wget -qO {destination_path} {download_url}; "
 
     def _build_download_command_curl(
         self, download_url: str, destination_path: PurePosixPath
     ) -> str:
-        return (
-            f"curl -so {destination_path} {download_url}; "
-            f"{self._set_permissions_command(destination_path)}; "
-        )
+        return f"curl -so {destination_path} {download_url}; "
 
-    def _set_permissions_command(self, destination_path: PurePosixPath) -> str:
-        return f"chmod +x {destination_path}"
+    def build_set_permissions_command(self, set_permissions_options: LinuxSetPermissionsOptions):
+        self._command += (
+            f"chmod {set_permissions_options.permissions:o} "
+            f"{set_permissions_options.agent_destination_path}; "
+        )
 
     def build_run_command(self, run_options: LinuxRunOptions):
-        self._command += (
-            f"{self._agent_otp_environment_variable}={self._otp_provider.get_otp()} "
-            f"{str(run_options.agent_destination_path)} "
-        )
+        if run_options.include_otp:
+            self._command += (
+                f"{self._agent_otp_environment_variable}={self._otp_provider.get_otp()} "
+            )
+
+        self._command += str(run_options.agent_destination_path)
 
         if run_options.dropper_execution_mode != DropperExecutionMode.SCRIPT:
-            self._command += self._build_agent_run_arguments(run_options)
+            self._command += " " + self._build_agent_run_arguments(run_options)
 
     def _build_agent_run_arguments(self, run_options: LinuxRunOptions) -> str:
         agent_arguments = build_monkey_commandline_parameters(

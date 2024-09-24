@@ -22,7 +22,6 @@ from monkey_island.cc.services.authentication_service.user import User
 
 USERNAME = "user1"
 PASSWORD = "test"
-PASSWORD_HASH = "$2b$12$yQzymz55fRvm8rApg7erluIvIAKSFSDrNIOIrOlxC4sXsDSkeu9z2"
 USERS = [
     User(username="user1", password="test1", fs_uniquifier="a"),
     User(username="user2", password="test2", fs_uniquifier="b"),
